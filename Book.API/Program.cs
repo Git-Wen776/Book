@@ -21,7 +21,7 @@ namespace Book.API
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             logger.Debug("init main");
             var host = CreateHostBuilder(args).Build();
-            using (var scope = host.Services.CreateScope())
+            using (var scope = host.Services.CreateScope()) 
             {
                 var log=scope.ServiceProvider.GetService<ILoggerFactory>().CreateLogger<Program>();
                 try
