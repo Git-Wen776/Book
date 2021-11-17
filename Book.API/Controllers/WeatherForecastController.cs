@@ -30,7 +30,6 @@ namespace Book.API.Controllers
         public ActionResult weathers()
         {
             var rng = new Random();
-            _logger.LogInformation("正常");
             var list= Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
