@@ -32,7 +32,6 @@ namespace Book.Extensions.SugarDb
         public void CreateTables(int setDefaultstring=200,bool isback = false, params Type[] types)
         {
             db.CodeFirst.SetStringDefaultLength(setDefaultstring);
-            
             if (db == null)
             {
                 logger.LogWarning("数据库未连接");

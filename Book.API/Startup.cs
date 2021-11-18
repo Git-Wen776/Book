@@ -105,29 +105,35 @@ namespace Book.API
             #region 授权方案
             SecurityKey security = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config.GetSection("Authen:SingingKey").Value));
             //简单授权--基于角色
-            services.AddAuthorization(options =>
+            bool openrole = false;
+            if (openrole)
             {
-                options.AddPolicy("User",p=>p.RequireRole("User").Build());
-                options.AddPolicy("Admin",p=>p.RequireRole("Admin").Build());
-                options.AddPolicy("Systemer", p => p.RequireRole("Systemer").Build());
-                options.AddPolicy("SysOrAdmin", p => p.RequireRole("Systemer", "Admin"));
-                options.AddPolicy("SysAndAdmin", p => p.RequireRole("Systemer").RequireRole("Admin").Build());
-            });
-            //复杂授权（说到底也是基于角色）
-            var authitem = new List<PermissionItem>();
-            var permissionrequirement = new PermissonRequirement(
-                 deniedAction:"",
-                 permissions: authitem,
-                 claimType: ClaimTypes.Role,//基于jwt的claim的claimTypes.Role
-                 issuer: config.GetSection("Authen:Isusser").Value,
-                 audience: config.GetSection("Authen:Audience").Value,
-                 signingCredentials: new SigningCredentials(security,SecurityAlgorithms.HmacSha256),
-                 expiration:TimeSpan.FromSeconds(60*2)
-                );
-            services.AddAuthorization(options =>
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("User", p => p.RequireRole("User").Build());
+                    options.AddPolicy("Admin", p => p.RequireRole("Admin").Build());
+                    options.AddPolicy("Systemer", p => p.RequireRole("Systemer").Build());
+                    options.AddPolicy("SysOrAdmin", p => p.RequireRole("Systemer", "Admin"));
+                    options.AddPolicy("SysAndAdmin", p => p.RequireRole("Systemer").RequireRole("Admin").Build());
+                });
+            }
+            else//复杂授权（说到底也是基于角色）
             {
-                options.AddPolicy("Permission", p => p.Requirements.Add(permissionrequirement));
-            });
+                var authitem = new List<PermissionItem>();
+                var permissionrequirement = new PermissonRequirement(
+                     deniedAction: "",
+                     permissions: authitem,
+                     claimType: ClaimTypes.Role,//基于jwt的claim的claimTypes.Role
+                     issuer: config.GetSection("Authen:Isusser").Value,
+                     audience: config.GetSection("Authen:Audience").Value,
+                     signingCredentials: new SigningCredentials(security, SecurityAlgorithms.HmacSha256),
+                     expiration: TimeSpan.FromSeconds(60 * 2)
+                    );
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("Permission", p => p.Requirements.Add(permissionrequirement));
+                });
+            }
             #endregion
             #region 认证方案
             
