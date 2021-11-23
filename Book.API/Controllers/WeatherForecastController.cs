@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Book.API.Message;
 using Microsoft.AspNetCore.Authorization;
+using Book.IService;
+using Microsoft.AspNetCore.Http;
 
 namespace Book.API.Controllers
 {
@@ -19,10 +21,14 @@ namespace Book.API.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IUserService userService;
+        private readonly IHttpContextAccessor contextAccessor;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IUserService user,IHttpContextAccessor accessor,ILogger<WeatherForecastController> logger):base(user,accessor)
         {
             _logger = logger;
+            userService = user;
+            contextAccessor = accessor;
         }
 
         [HttpGet(Name = "weathers")]

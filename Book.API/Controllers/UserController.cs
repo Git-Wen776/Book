@@ -22,13 +22,15 @@ namespace Book.API.Controllers
         private readonly IUserService userservice;
         private readonly ILogger<UserController> logger;
         private readonly IConfiguration config;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public UserController(IUnitWork _work, IUserService _service, ILogger<UserController> _logger,IConfiguration _configuration)
+        public UserController(IUserService _service,IHttpContextAccessor accessor,IUnitWork _work, ILogger<UserController> _logger,IConfiguration _configuration):base(_service,accessor)
         {
             work = _work;
             userservice = _service;
             logger = _logger;
             config = _configuration;
+            httpContextAccessor = accessor;
         }
 
         [HttpGet(Name = "GetUser")]

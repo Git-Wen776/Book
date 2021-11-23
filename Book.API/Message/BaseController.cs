@@ -6,11 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Book.IService;
+using Book.Models;
 
 namespace Book.API.Message
 {
     public class BaseController:ControllerBase
     {
+        protected readonly IUserService _userService;
+        private readonly IHttpContextAccessor _contextAccessor;
+        public BaseController(IUserService userService,IHttpContextAccessor contextAccessor)
+        {
+            _userService = userService;
+            _contextAccessor = contextAccessor;
+        }
+
         [NonAction]
         public OKResult Success([ActionResultObjectValue] object value)
         {
@@ -20,6 +30,13 @@ namespace Book.API.Message
         public FailResult Fail([ActionResultObjectValue] object value)
         {
             return new FailResult(value);
+        }
+
+        [NonAction]
+        public Task<User> GetLoginUser()
+        {
+            var value = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(p => p.Type.ToString() == "jti").Value;
+            return _userService.FindAsync(Convert.ToInt32(value));
         }
     }
     public interface IMessage
