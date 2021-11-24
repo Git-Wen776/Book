@@ -2,10 +2,13 @@
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Book.API.AuthonCommon
+namespace Book.Extensions
 {
-    public class PermissonRequirement:IAuthorizationRequirement
+    public class PermissonRequirement : IAuthorizationRequirement
     {
         /// <summary>
         /// 用户权限集合，一个订单包含了很多详情，

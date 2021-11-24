@@ -1,4 +1,5 @@
-﻿using Book.Models;
+﻿using Book.Extensions;
+using Book.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Book.IService
 {
     public interface IAuthService:IBaseService<Role>
     {
+       public Task<List<PermissionItem>> GetPermissions();
     }
 }
