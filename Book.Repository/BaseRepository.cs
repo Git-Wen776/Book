@@ -60,6 +60,11 @@ namespace Book.Repository
             return base.GetByIdAsync(id);
         }
 
+        public Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return db.Queryable<TEntity>().FirstAsync(expression);
+        }
+
         public Task<List<TEntity>> QueryAsync()
         {
             return db.Queryable<TEntity>().ToListAsync();

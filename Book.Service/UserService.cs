@@ -37,5 +37,11 @@ namespace Book.Service
             var lamada = expression.CatchModel(user); 
             return base.QueryAsync(lamada);
         }
+
+        public Task<User> GetuserAsync(User user)
+        {
+            var lamada=expression.CatchModel(user);
+            return repository.FindAsync(lamada);
+        }
     }
 }

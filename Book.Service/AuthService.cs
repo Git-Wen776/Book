@@ -44,9 +44,13 @@ namespace Book.Service
                            Role=r.RoleName,
                            Url=u.Url
                        }).ToList();
-                     
-
             return list;
+        }
+
+        public Task<List<Role>> Roles(int uid)
+        {
+            Expression<Func<Role,bool>> expression=r=>r.UserId== uid;
+            return roleRepository.QueryAsync(expression);
         }
     }
 }

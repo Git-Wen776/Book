@@ -111,5 +111,7 @@ namespace Book.IRepository
             Expression<Func<T, T2, T3, TResult>> selectExpre,
             Expression<Func<TResult, bool>> whereExpre,
             int page, int size, RefAsync<int> total);
+
+        Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> expression);
     }
 }

@@ -11,5 +11,7 @@ namespace Book.IService
     public interface IAuthService:IBaseService<Role>
     {
        public Task<List<PermissionItem>> GetPermissions();
+
+        public Task<List<Role>> Roles(int uid);
     }
 }

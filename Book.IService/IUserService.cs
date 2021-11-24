@@ -11,6 +11,8 @@ namespace Book.IService
     {
         Task<List<User>> UserQueryAsync();
         Task<List<User>> GetUsers(User user);
+
+        Task<User> GetuserAsync(User user);
     }
 
 }
