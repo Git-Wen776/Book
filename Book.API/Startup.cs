@@ -31,6 +31,7 @@ using System.Security.Claims;
 using Book.Extensions.ExpressionExtensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Book.Extensions.RedisHelper;
 
 namespace Book.API
 {
@@ -168,7 +169,7 @@ namespace Book.API
             #region automapper≈‰÷√
             #endregion
             #region redis≈‰÷√
-            
+            services.AddRedisSetup();
             #endregion
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

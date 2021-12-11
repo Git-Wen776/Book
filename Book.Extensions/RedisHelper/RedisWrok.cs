@@ -131,7 +131,7 @@ namespace Book.Extensions.RedisHelper
 
     public static class RedisSetup
     {
-        public static void AddRedisSetup(IServiceCollection service)
+        public static void AddRedisSetup(this IServiceCollection service)
         {
             service.AddSingleton<RedisDB>(p=>new RedisDB());
             service.AddScoped<IRedisWrok,RedisWrok>();

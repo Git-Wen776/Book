@@ -16,7 +16,7 @@ namespace Book.Models.ModelValidation
             RuleFor(p => p.Password).NotEmpty();
             RuleFor(p=>p.Account).NotEmpty();
             RuleFor(p => p.Birtime).Must(p=>p<=DateTime.Now);
-            
+            RuleFor(p => p.Phone).SetValidator(new RegexValidaProperty<User>(""));
         }
     }
 }
