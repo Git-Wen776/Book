@@ -29,6 +29,8 @@ using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Book.Extensions.ExpressionExtensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Book.API
 {
@@ -51,7 +53,7 @@ namespace Book.API
               .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
               .Add(new JsonConfigurationSource { Path = "appsettings.json", Optional = false, ReloadOnChange = true })//这样的话，可以直接读目录里的json文件，而不是 bin 文件夹下的，所以不用修改复制属性
               .Build();
-            services.AddConfigValue();
+            services.AddSingleton(new ConfigHelper(Configuration));
             #endregion
             services.AddControllers();
             #region Swagger配置
@@ -131,13 +133,17 @@ namespace Book.API
                     );
                 services.AddAuthorization(options =>
                 {
-                    options.AddPolicy("Permission", p => p.Requirements.Add(permissionrequirement));
+                    options.AddPolicy("BookPolicy", p => p.Requirements.Add(permissionrequirement));
                 });
             }
             #endregion
             #region 认证方案
-            
-            services.AddAuthentication("Bearer")
+
+            services.AddAuthentication(s=> {
+                s.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                s.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                s.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
@@ -154,10 +160,15 @@ namespace Book.API
             #endregion
             //注入jwthelper
             services.AddScoped<JwtHelper>(p=>new JwtHelper(config));
+
+            services.AddScoped<IAuthorizationHandler, AuthHandler>();
             //注入httpcontext上下文
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             #endregion
             #region automapper配置
+            #endregion
+            #region redis配置
+            
             #endregion
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,7 +15,7 @@ namespace Book.API.Controllers
     {
         // GET: api/<BookController>
         [HttpGet]
-        [Authorize(Policy ="Admin")]
+        [Authorize(Policy = "BookPolicy")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

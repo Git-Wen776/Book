@@ -131,8 +131,8 @@ namespace Book.Repository
             TEntity entity, OrderByType type, int page, int size, RefAsync<int> total)
         {
             if (expression == null || string.IsNullOrEmpty(oderbyfiled))
-                return db.Queryable<TEntity>().OrderBy(oderbyfiled).WhereClass(entity).ToPageListAsync(page, size, total);
-            return db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(oderbyfiled), expression, type).WhereClass(entity).ToPageListAsync(page, size, total);
+                return db.Queryable<TEntity>().OrderBy(oderbyfiled).WhereClass(entity).ToPageListAsync(page,size,total);
+            return db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(oderbyfiled), expression, type).WhereClass(entity).ToPageListAsync(page,size,total);
         }
         /// <summary>
         /// 单表排序自定义查询
@@ -145,23 +145,24 @@ namespace Book.Repository
         /// <param name="size"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public async Task<List<TEntity>> QueryAsync(string oderbyfiled,
+        public Task<List<TEntity>> QueryAsync(string oderbyfiled,
             Expression<Func<TEntity, bool>> whereExpr,
             OrderByType type, int page, int size, RefAsync<int> total)
         {
             if (whereExpr != null)
-                return await db.Queryable<TEntity>().Where(whereExpr).ToPageListAsync(page, size, total);
-            return await this.QueryAsync(page, size, total);
+                return  db.Queryable<TEntity>().Where(whereExpr).ToPageListAsync(page,size,total);
+            return  this.QueryAsync(page, size, total);
         }
         /// <summary>
         /// 三表分页查询
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <typeparam name="T3"></typeparam>
         /// <typeparam name="T2"></typeparam>
+        /// <typeparam name="T3"></typeparam>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="orderfiled"></param>
         /// <param name="joinExpre"></param>
+        /// <param name="selectExpre"></param>
         /// <param name="whereExpre"></param>
         /// <param name="page"></param>
         /// <param name="size"></param>
@@ -173,7 +174,7 @@ namespace Book.Repository
             Expression<Func<TResult, bool>> whereExpre,
             int page, int size, RefAsync<int> total)
         {
-            return  db.Queryable(joinExpre).
+            return db.Queryable(joinExpre).
                 OrderByIF(!string.IsNullOrEmpty(orderfiled), orderfiled).
                 Select(selectExpre).
                 Where(whereExpre).

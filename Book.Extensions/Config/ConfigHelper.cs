@@ -12,7 +12,7 @@ namespace Book.Extensions.Config
 {
    public  class ConfigHelper
     {
-        private static IConfiguration Config { get; set; }
+        private static IConfiguration Config;
         
         public ConfigHelper(IConfiguration _config){
             Config = _config;

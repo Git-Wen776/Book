@@ -15,7 +15,7 @@ namespace Book.Models
 
         public string UserIds { get; set; }
 
-        [SugarColumn(ColumnDataType = "Nvarchar(20)")]
+        [SugarColumn(ColumnDataType = "varchar(20)")]
         public string Name { get; set; }
 
         public DateTime Birtime { get; set; }
@@ -24,10 +24,10 @@ namespace Book.Models
 
         public string Email { get; set; }
 
-        [SugarColumn(ColumnDataType = "Nvarchar(20)")]
+        [SugarColumn(ColumnDataType = "varchar(20)")]
         public string Password { get; set; }
 
-        [SugarColumn(ColumnDataType ="Nvarchar(20)")]
+        [SugarColumn(ColumnDataType ="varchar(20)")]
         public string Account { get; set; }
 
         [SugarColumn(IsIgnore =true)]

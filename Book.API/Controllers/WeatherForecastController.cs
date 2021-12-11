@@ -32,7 +32,7 @@ namespace Book.API.Controllers
         }
 
         [HttpGet(Name = "weathers")]
-        [Authorize(Policy ="User")]
+        [Authorize(Policy = "BookPolicy")]
         public ActionResult weathers()
         {
             var rng = new Random();

@@ -40,7 +40,7 @@ namespace Book.API.Controllers
         }
 
         [HttpGet(Name ="GetPorts")]
-        [Authorize(Policy = "User")]
+        [Authorize(Policy = "BookPolicy")]
         public ActionResult GetPorts() {
             List<string> list = new();
             config.Bind("AllowPorts", list);

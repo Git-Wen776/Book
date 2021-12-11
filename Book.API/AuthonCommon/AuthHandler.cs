@@ -14,13 +14,11 @@ namespace Book.API.AuthonCommon
     public class AuthHandler : AuthorizationHandler<PermissonRequirement>
     {
         private readonly IHttpContextAccessor accessor;
-        private readonly IAuthorizationService authorizationService;
         private readonly IAuthService auth;
         private readonly IAuthenticationSchemeProvider _schemes;
-        public AuthHandler(IHttpContextAccessor _accessor, IAuthorizationService _authorizationService, IAuthService _auth, IAuthenticationSchemeProvider schemes = null)
+        public AuthHandler(IHttpContextAccessor _accessor, IAuthService _auth, IAuthenticationSchemeProvider schemes)
         {
             accessor = _accessor;
-            authorizationService = _authorizationService;
             auth = _auth;
             _schemes = schemes;
         }
@@ -51,7 +49,7 @@ namespace Book.API.AuthonCommon
                     if (urls.Any(p => p == url))
                         context.Succeed(requirement);
                 }
-                var time = httpcontext.User.Claims.Where(p => p.Type == ClaimTypes.Expiration).FirstOrDefault();
+                var time = httpcontext.User.Claims.Where(p => p.Type.ToString()=="Exp").FirstOrDefault();
                 if(time?.Value==null&& DateTime.Parse(time.Value) < DateTime.Now)
                 {
                     context.Fail();
