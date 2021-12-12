@@ -86,7 +86,7 @@ namespace Book.Extensions.RedisHelper
                 return default;
             string value = await db.HashGetAsync(key, filed);
             return _serializeHelper.DesSerialize<T>(value);
-        }
+        }//、、M
 
         public async Task<List<T>> HashGetList<T>(string key)
         {

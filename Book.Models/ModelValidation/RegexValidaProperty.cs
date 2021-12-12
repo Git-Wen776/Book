@@ -17,18 +17,22 @@ namespace Book.Models.ModelValidation
 
         public RegexValidaProperty(string _regesStr)
         {
-            regestr= _regesStr;
+            regestr = _regesStr;
         }
 
         public override bool IsValid(ValidationContext<T> context, string value)
         {
-            if(value == null)
-                throw new ArgumentNullException(nameof(value));
-            if (value.Equals(""))
-                throw new ArgumentException("value is not empty string");
-            Regex regex=new Regex(regestr);
+            
+            if(string.IsNullOrEmpty(value))
+                throw new ArgumentException("value is not empty or null string");
+            if (string.IsNullOrEmpty(value))
+                context.MessageFormatter.AppendArgument("RegesStr",regestr);
+            Regex regex = new Regex(regestr);
             return regex.IsMatch(value);
 
         }
+
+        protected override string GetDefaultMessageTemplate(string errorCode) => $"";
+        
     }
 }

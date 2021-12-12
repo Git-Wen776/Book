@@ -13,7 +13,7 @@ namespace Book.Models.ModelValidation
         {
             RuleFor(p=>p.Name).NotEmpty();
             RuleFor(p=>p.Email).EmailAddress().NotEmpty();
-            RuleFor(p => p.Password).NotEmpty();
+            RuleFor(p => p.Password).NotEmpty().MaximumLength(10);
             RuleFor(p=>p.Account).NotEmpty();
             RuleFor(p => p.Birtime).Must(p=>p<=DateTime.Now);
             RuleFor(p => p.Phone).SetValidator(new RegexValidaProperty<User>(""));
