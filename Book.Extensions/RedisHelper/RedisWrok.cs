@@ -133,7 +133,7 @@ namespace Book.Extensions.RedisHelper
     {
         public static void AddRedisSetup(this IServiceCollection service)
         {
-            service.AddSingleton<RedisDB>(p=>new RedisDB());
+            service.AddScoped<RedisDB>(p=>new RedisDB());
             service.AddScoped<IRedisWrok,RedisWrok>();
         }
     }

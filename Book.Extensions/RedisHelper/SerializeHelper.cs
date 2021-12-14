@@ -43,7 +43,7 @@ namespace Book.Extensions.RedisHelper
     {
         public static void AddSerializeSetup(this IServiceCollection service)
         {
-            service.AddSingleton<SerializeHelper>(p=>SerializeHelper.GetSerialize());
+            service.AddScoped<SerializeHelper>(p=>SerializeHelper.GetSerialize());
         }
     }
 }

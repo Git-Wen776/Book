@@ -170,6 +170,7 @@ namespace Book.API
             #endregion
             #region redis≈‰÷√
             services.AddRedisSetup();
+            services.AddSerializeSetup();
             #endregion
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

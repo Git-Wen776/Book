@@ -44,26 +44,26 @@ namespace Book.IRepository
         /// <param name="parameters"></param>
         /// <returns></returns>
         Task<List<TEntity>> UseProcAsync(string procname, List<SugarParameter> parameters);
-        ///// <summary>
-        ///// 两表分页查询
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <typeparam name="T2"></typeparam>
-        ///// <typeparam name="TResult"></typeparam>
-        ///// <param name="joinexpre"></param>
-        ///// <param name="selectexpre"></param>
-        ///// <param name="whereExpre"></param>
-        ///// <param name="page"></param>
-        ///// <param name="size"></param>
-        ///// <param name="total"></param>
-        ///// <returns></returns>
-        //Task<List<TResult>> QueryAsync<T, T2, TResult>(
-        //    Expression<Func<T, T2, object[]>> joinexpre,
-        //    Expression<Func<T, T2, TResult>> selectexpre,
-        //    Expression<Func<TResult, bool>> whereExpre,
-        //    int page,
-        //    int size,
-        //    RefAsync<int> total);
+        /// <summary>
+        /// 两表分页查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="joinexpre"></param>
+        /// <param name="selectexpre"></param>
+        /// <param name="whereExpre"></param>
+        /// <param name="page"></param>
+        /// <param name="size"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
+        Task<List<TResult>> QueryAsync<T, T2, TResult>(
+            Expression<Func<T, T2, object[]>> joinexpre,
+            Expression<Func<T, T2, TResult>> selectexpre,
+            Expression<Func<TResult, bool>> whereExpre,
+            int page,
+            int size,
+            RefAsync<int> total);
         /// <summary>
         /// 实体分页排序查询
         /// </summary>
@@ -94,23 +94,23 @@ namespace Book.IRepository
             Expression<Func<TEntity, bool>> whereExpr,
             OrderByType type,
             int page, int size, RefAsync<int> total);
-        ///// <summary>
-        ///// 两表分页排序查询
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <typeparam name="TResult"></typeparam>
-        ///// <param name="orderfiled"></param>
-        ///// <param name="joinExpre"></param>
-        ///// <param name="whereExpre"></param>
-        ///// <param name="page"></param>
-        ///// <param name="size"></param>
-        ///// <param name="total"></param>
-        ///// <returns></returns>
-        //Task<List<TResult>> QueryAsync<T, T2, T3, TResult>(string orderfiled,
-        //    Expression<Func<T, T2, T3, object[]>> joinExpre,
-        //    Expression<Func<T, T2, T3, TResult>> selectExpre,
-        //    Expression<Func<TResult, bool>> whereExpre,
-        //    int page, int size, RefAsync<int> total);
+        /// <summary>
+        /// 两表分页排序查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="orderfiled"></param>
+        /// <param name="joinExpre"></param>
+        /// <param name="whereExpre"></param>
+        /// <param name="page"></param>
+        /// <param name="size"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
+        Task<List<TResult>> QueryAsync<T, T2, T3, TResult>(string orderfiled,
+            Expression<Func<T, T2, T3, object[]>> joinExpre,
+            Expression<Func<T, T2, T3, TResult>> selectExpre,
+            Expression<Func<TResult, bool>> whereExpre,
+            int page, int size, RefAsync<int> total);
 
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> expression);
     }

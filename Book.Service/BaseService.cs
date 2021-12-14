@@ -63,10 +63,12 @@ namespace Book.Service
             return _repository.QueryAsync(sql, parameters);
         }
 
-        public Task<List<TResult>> QueryAsync<T, T2, TResult>(Expression<Func<T, T2, object[]>> joinexpre, Expression<Func<T, T2, TResult>> selectexpre,
-            Expression<Func<TResult, bool>> whereExpre, int page, int size, RefAsync<int> total)
+        public Task<List<TResult>> QueryAsync<T, T2, TResult>(Expression<Func<T, T2, object[]>> joinexpre,
+            Expression<Func<T, T2, TResult>> selectexpre,
+            Expression<Func<TResult, bool>> whereExpre, 
+            int page, int size, RefAsync<int> total)
         {
-            return _repository.QueryAsync(joinexpre,selectexpre,whereExpre,page,size,total);
+            return _repository.QueryAsync<T, T2, TResult>(joinexpre, selectexpre, whereExpre, page, size, total);
         }
 
         public Task<List<TEntity>> QueryAsync(string oderbyfiled,

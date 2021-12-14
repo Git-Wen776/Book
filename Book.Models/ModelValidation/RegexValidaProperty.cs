@@ -25,7 +25,7 @@ namespace Book.Models.ModelValidation
             
             if(string.IsNullOrEmpty(value))
                 throw new ArgumentException("value is not empty or null string");
-            if (string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(regestr))
                 context.MessageFormatter.AppendArgument("RegesStr",regestr);
             Regex regex = new Regex(regestr);
             return regex.IsMatch(value);
