@@ -12,15 +12,18 @@ namespace Book.Extensions.RedisHelper
     {
         private ConnectionMultiplexer _redis;
         private readonly Object obj=new object();
-        public  IDatabase redisdb;
+        public  IDatabase redisdb { get { return _db; } }
+        private readonly ConfigHelper _config;
+        private IDatabase _db;
        
-        public RedisDB()
+        public RedisDB(ConfigHelper config)
         {
-            var connectionstr = ConfigHelper.settingStr(new string[] { "ConfigurationOptions", "host" });
+            _config = config;
+            var connectionstr = _config.settingStr(new string[] { "ConfigurationOptions", "host" });
             if (connectionstr == null)
                 throw new ArgumentException("redis connectstring is empty");
             RedidConnect(connectionstr);
-            redisdb = _redis.GetDatabase();
+            _db = _redis.GetDatabase();
         }
 
         private void RedidConnect(string connect)

@@ -12,7 +12,7 @@ namespace Book.Extensions.Config
 {
    public  class ConfigHelper
     {
-        private static IConfiguration Config;
+        private readonly IConfiguration Config;
         
         public ConfigHelper(IConfiguration _config){
             Config = _config;
@@ -30,7 +30,7 @@ namespace Book.Extensions.Config
                 }).Build();
         }
 
-        public static string settingStr(params string[] settings) {
+        public  string settingStr(params string[] settings) {
             var section = string.Join(':', settings);
             if (settings is not null) {
                 return Config.GetSection(section).Value;
@@ -38,14 +38,14 @@ namespace Book.Extensions.Config
             return null;
         }
 
-        public static List<T> GetValues<T>(string[] param)
+        public  List<T> GetValues<T>(string[] param)
         {
             List<T> list = new List<T>();
             Config.Bind(string.Join(':', param), list);
             return list;
         }
 
-        public static T GetObject<T>(string[] param)
+        public  T GetObject<T>(string[] param)
         {
             T t=default;
             Config.Bind(string.Join(':', param), t);
@@ -53,10 +53,4 @@ namespace Book.Extensions.Config
         }
     }
 
-    public static class Addconfig {
-        public static void AddConfigValue(this IServiceCollection service)
-        {
-            service.AddScoped<ConfigHelper>();
-        }
-    }
 }
