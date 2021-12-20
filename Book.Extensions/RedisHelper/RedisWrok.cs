@@ -86,7 +86,7 @@ namespace Book.Extensions.RedisHelper
                 return default;
             string value = await db.HashGetAsync(key, filed);
             return _serializeHelper.DesSerialize<T>(value);
-        }//、、M
+        }
 
         public async Task<List<T>> HashGetList<T>(string key)
         {
@@ -133,7 +133,7 @@ namespace Book.Extensions.RedisHelper
     {
         public static void AddRedisSetup(this IServiceCollection service)
         {
-            service.AddScoped<RedisDB>(p=>new RedisDB());
+            service.AddScoped<RedisDB>();
             service.AddScoped<IRedisWrok,RedisWrok>();
         }
     }

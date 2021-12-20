@@ -9,7 +9,4 @@
 	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.5" />
 	  <PackageReference Include="SqlSugarCore" Version="5.0.4.3-preview04" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
 </Project>

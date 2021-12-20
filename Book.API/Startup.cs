@@ -32,6 +32,7 @@ using Book.Extensions.ExpressionExtensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Book.Extensions.RedisHelper;
+using Book.Extensions.AutoMapperConfig;
 
 namespace Book.API
 {
@@ -167,6 +168,7 @@ namespace Book.API
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             #endregion
             #region automapper≈‰÷√
+            services.AddAutoMapperSetup();
             #endregion
             #region redis≈‰÷√
             services.AddRedisSetup();
