@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,10 @@ namespace Book.Extensions.AutoMapperConfig
         {
             service.AddAutoMapper(p =>
             {
-                p.AddProfile<UserProfile>();
+                var profiles = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(a => a.Name.EndsWith("Profile"));
+                foreach(var profile in profiles)
+                    p.AddProfile(profile);
             });
         }
     }
