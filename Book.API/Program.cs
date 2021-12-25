@@ -28,7 +28,7 @@ namespace Book.API
                 {
                     var work = scope.ServiceProvider.GetService<IUnitWork>();
                     Type[] types = new Type[] { typeof(ApiUrl), typeof(Bookes), typeof(BookTypes), typeof(Modular), 
-                        typeof(Role), typeof(Types), typeof(User),typeof(Author),typeof(Hobby) };
+                        typeof(Role), typeof(Types), typeof(User),typeof(Author),typeof(Hobby),typeof(TaskQz) };
                     work.CreateTables(200, false, types);
                     log.LogInformation("初始化数据库表成功");
                 }

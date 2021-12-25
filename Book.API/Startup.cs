@@ -156,6 +156,7 @@ namespace Book.API
                         ValidateAudience = true,
                         ValidAudience = config.GetSection("Authen:Audience").Value,
                         RequireExpirationTime = true,
+                        ClockSkew=TimeSpan.Zero,
                         ValidateLifetime = true,
                     };
                 });

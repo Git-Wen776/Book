@@ -62,6 +62,7 @@ namespace Book.API.AuthonCommon
                 context.Fail();
                 return ;
             }
+            context.Succeed(requirement);
             return;
         }
     }
