@@ -174,6 +174,10 @@ namespace Book.API
             #region redisÅäÖÃ
             services.AddRedisSetup();
             services.AddSerializeSetup();
+            services.AddStackExchangeRedisCache(p => {
+                p.Configuration = "82.157.50.112:1545";
+                p.InstanceName = "Aw";
+            });
             #endregion
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
