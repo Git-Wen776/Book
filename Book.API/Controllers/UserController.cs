@@ -11,6 +11,7 @@ using Book.API.Message;
 using Book.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace Book.API.Controllers
 {
@@ -23,19 +24,22 @@ namespace Book.API.Controllers
         private readonly ILogger<UserController> logger;
         private readonly IConfiguration config;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserService _service,IHttpContextAccessor accessor,IUnitWork _work, ILogger<UserController> _logger,IConfiguration _configuration):base(_service,accessor)
+        public UserController(IUserService _service,IHttpContextAccessor accessor,IUnitWork _work, ILogger<UserController> _logger,IConfiguration _configuration,IMapper mapper):base(_service,accessor)
         {
             work = _work;
             userservice = _service;
             logger = _logger;
             config = _configuration;
             httpContextAccessor = accessor;
+            _mapper = mapper;
         }
 
         [HttpGet(Name = "GetUser")]
         public async Task<ActionResult> GetUser(int id)
         {
+            
             return Success(await userservice.FindAsync(id));
         }
 
@@ -49,6 +53,7 @@ namespace Book.API.Controllers
 
         [HttpGet(Name = "GetUsers")]
         public async Task<ActionResult> GetUsers() {
+            
             
             var list = await userservice.UserQueryAsync();
             if (list.Count == 0) {

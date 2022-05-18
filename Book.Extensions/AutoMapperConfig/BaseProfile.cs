@@ -11,7 +11,7 @@ namespace Book.Extensions.AutoMapperConfig
     {
         public BaseProfile()
         {
-            CreateMap<TModel,TDto>();
+            CreateMap<TModel,TDto>().ReverseMap();
         }
     }
 }
