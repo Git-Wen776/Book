@@ -28,6 +28,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Book.Extensions.RedisHelper;
 using Book.Extensions.AutoMapperConfig;
+using Book.Extensions.YGCode;
 
 namespace Book.API
 {
@@ -174,6 +175,7 @@ namespace Book.API
                 p.InstanceName = "Aw";
             });
             #endregion
+            services.AddSingetionCode(p=>p.Codes=4);
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
