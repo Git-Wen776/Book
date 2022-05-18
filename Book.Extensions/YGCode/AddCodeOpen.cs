@@ -12,7 +12,7 @@ namespace Book.Extensions.YGCode
         public static IServiceCollection AddSingetionCode(this IServiceCollection service, Action<CodeOptions> code)
         {
             var options=new CodeOptions();
-            code(options);
+            code.Invoke(options);
             service.AddSingleton<ICodeOpen>(p=> new CodeOpen(options));
             return service;
         }
