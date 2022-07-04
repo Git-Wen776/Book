@@ -68,5 +68,11 @@ namespace Book.API.Controllers
             User user = new User() { Name = name };
             return Success(await userservice.GetUsers(user));
         }
+
+        [HttpGet(Name = "Todate")]
+        public ActionResult Todate(string date)
+        {
+            return Success(Convert.ToDateTime(date));
+        }
     }
 }
