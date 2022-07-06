@@ -50,7 +50,7 @@ namespace Book.API.AuthonCommon
                         context.Succeed(requirement);
                 }
                 var time = httpcontext.User.Claims.Where(p => p.Type.ToString()=="Exp").FirstOrDefault();
-                if(time?.Value==null&& DateTime.Parse(time.Value) < DateTime.Now)
+                if(time?.Value==null|| DateTime.Parse(time.Value) < DateTime.Now)
                 {
                     context.Fail();
                     return;

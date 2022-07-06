@@ -54,6 +54,7 @@ namespace Book.API
             services.AddSingleton(new ConfigHelper(Configuration));
             #endregion
             services.AddControllers();
+            services.AddMvcCore();
             #region SwaggerÅäÖÃ
             services.AddSwaggerGen(c =>
             {
