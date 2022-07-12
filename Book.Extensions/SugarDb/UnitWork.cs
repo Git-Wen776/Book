@@ -22,6 +22,14 @@ namespace Book.Extensions.SugarDb
         public void Begintran()
         {
             db.Ado.BeginTran();
+            db.Aop.OnLogExecuting = (str, param) =>
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                   RollbackTran();
+                }
+                logger.LogInformation($"Sql:{str}--Params:{string.Join("--",param.ToList())}");
+            };
         }
 
         public void CommitTran()
@@ -61,8 +69,11 @@ namespace Book.Extensions.SugarDb
             }
             catch (Exception)
             {
-
                 db.Ado.RollbackTran();
+                db.Aop.OnError = ex =>
+                {
+                    logger.LogError(ex.ToString());
+                };
             }
         }
     }
